@@ -3,7 +3,7 @@
  * https://github.com/stevenjoezhang/live2d-widget
  */
 
-function loadWidget(config) {
+function loadWidget(config) { //加载live2d并且向页面注入dom节点
 	let { waifuPath, apiPath, cdnPath } = config;
 	let useCDN = false, modelList;
 	if (typeof cdnPath === "string") {
@@ -31,8 +31,8 @@ function loadWidget(config) {
 		document.getElementById("waifu").style.bottom = 0;
 	}, 0);
 
-	(function registerEventListener() {
-		document.querySelector("#waifu-tool .fa-comment").addEventListener("click", showHitokoto);
+	(function registerEventListener() { // 添加事件
+		document.querySelector("#waifu-tool .fa-comment").addEventListener("click", showHitokoto); // 第一个按钮，点击会随机返回一句名言（）
 		document.querySelector("#waifu-tool .fa-paper-plane").addEventListener("click", () => {
 			if (window.Asteroids) {
 				if (!window.ASTEROIDSPLAYERS) window.ASTEROIDSPLAYERS = [];
@@ -71,7 +71,7 @@ function loadWidget(config) {
 			showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
 		});
 		window.addEventListener("visibilitychange", () => {
-			if (!document.hidden) showMessage("哇，123123213你终于回来了～", 6000, 9);
+			if (!document.hidden) showMessage("哇，你终于回来了～", 6000, 9);
 		});
 	})();
 
@@ -100,7 +100,7 @@ function loadWidget(config) {
 		}
 		showMessage(text, 7000, 8);
 	})();
-	function randomSelection(obj) {
+	function randomSelection(obj) { // 筛选内容， 如果内容是数组，则随机选择一个项返回
 		return Array.isArray(obj) ? obj[Math.floor(Math.random() * obj.length)] : obj;
 	}
 	// 检测用户活动状态，并在空闲时显示消息
@@ -135,7 +135,7 @@ function loadWidget(config) {
 			});
 	}
 
-	function showMessage(text, timeout, priority) {
+	function showMessage(text, timeout, priority) { // 暂时对话，参数分别为内容、延迟和显示优先级
 		if (!text) return;
 		if (!sessionStorage.getItem("waifu-text") || sessionStorage.getItem("waifu-text") <= priority) {
 			if (messageTimer) {
