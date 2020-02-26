@@ -1,4 +1,5 @@
 /*
+/*
  * Live2D Widget
  * https://github.com/stevenjoezhang/live2d-widget
  */
@@ -71,7 +72,7 @@ function loadWidget(config) { //加载live2d并且向页面注入dom节点
 			showMessage("你都复制了些什么呀，转载要记得加上出处哦！", 6000, 9);
 		});
 		window.addEventListener("visibilitychange", () => {
-			if (!document.hidden) showMessage("哇，你终于回来了～", 6000, 9);
+			if (!document.hidden) showMessage("欢迎回来~", 6000, 9);
 		});
 	})();
 
@@ -79,14 +80,8 @@ function loadWidget(config) { //加载live2d并且向页面注入dom节点
 		var text;
 		if (location.pathname === "/") { // 如果是主页
 			var now = new Date().getHours();
-			if (now > 5 && now <= 7) text = "早上好！一日之计在于晨，美好的一天就要开始了。";
-			else if (now > 7 && now <= 11) text = "上午好！工作顺利嘛，不要久坐，多起来走动走动哦！";
-			else if (now > 11 && now <= 13) text = "中午了，工作了一个上午，现在是午餐时间！";
-			else if (now > 13 && now <= 17) text = "午后很容易犯困呢，今天的运动目标完成了吗？";
-			else if (now > 17 && now <= 19) text = "傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红～";
-			else if (now > 19 && now <= 21) text = "晚上好，今天过得怎么样？";
-			else if (now > 21 && now <= 23) text = ["已经这么晚了呀，早点休息吧，晚安～", "深夜时要爱护眼睛呀！"];
-			else text = "你是夜猫子呀？这么晚还不睡觉，明天起的来嘛？";
+			if (now > 5 && now <= 23) text = "你好呀，我是本站的看板娘，主人现在不在家，不要做坏事哦"
+			else text = ["已经这么晚了呀，早点休息吧，晚安～", "深夜时要爱护眼睛呀！"];
 		} else if (document.referrer !== "") {
 			var referrer = new URL(document.referrer),
 				domain = referrer.hostname.split(".")[1];
@@ -217,6 +212,7 @@ function loadWidget(config) { //加载live2d并且向页面注入dom节点
 	}
 
 	async function loadRandModel() {
+    showMessage("我去翻一下衣柜哦~", 4000, 1);
 		var modelId = localStorage.getItem("modelId"),
 			modelTexturesId = localStorage.getItem("modelTexturesId");
 		if (useCDN) {
@@ -229,7 +225,7 @@ function loadWidget(config) { //加载live2d并且向页面注入dom节点
 			fetch(`${apiPath}rand_textures/?id=${modelId}-${modelTexturesId}`)
 				.then(response => response.json())
 				.then(result => {
-					if (result.textures.id === 1 && (modelTexturesId === 1 || modelTexturesId === 0)) showMessage("我还没有其他衣服呢！", 4000, 10);
+					if (result.textures.id === 1 && (modelTexturesId === 1 || modelTexturesId === 0)) showMessage("我没有其他衣服了！", 4000, 10);
 					else loadModel(modelId, result.textures.id, "我的新衣服好看嘛？");
 				});
 		}
